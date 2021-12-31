@@ -1,0 +1,28 @@
+        //NINTENDO SWITCH GAMES - https://www.ebay.co.uk/b/Nintendo-Switch-Video-Games/139973/bn_75532845
+
+            //ELEMENT title - s-item__title s-item__title--has-tags
+            //BASE TITLE ELEMENT - s-item__title
+            //"https://www.ebay.co.uk/b/Nintendo-Switch-Video-Games/139973/bn_75532845"
+
+
+        Elements items = doc.getElementsByClass("s-item__info clearfix");
+        //
+        for (Element product : items) {
+            if (!product.getElementsByClass("s-item__title-tag").toString().contains("SPONSORED")) {
+                String title = product.getElementsByClass("s-item__title").toString();
+                title = title.replaceAll("\\<.*?\\>", "");
+                title=title.replaceAll("amp;","");
+                //
+                String price = product.getElementsByClass("s-item__price").toString();
+                price = price.replaceAll("\\<.*?\\>", "");
+                //
+                String url = product.getElementsByClass("s-item__link").toString();
+                url = url.substring(url.indexOf("href=") + 6, url.indexOf("><h3") - 1);
+
+                products.add(new Product(product, title, price, url));
+                products.get(products.size() - 1).output();
+
+                //System.out.println(product);
+                System.out.println("-------------------------------------------------------------");
+            }
+        }

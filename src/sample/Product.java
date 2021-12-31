@@ -5,7 +5,7 @@ import org.jsoup.nodes.Element;
 public class Product {
 
     String title;
-    String price, strikePrice;
+    String price;
     String url;
     Element product;
 
@@ -16,26 +16,9 @@ public class Product {
         this.url = url;
     }
 
-    public Product(String title, String price, String url) {
-
-
-    }
-
-    public Product(String title, String price, String strikePrice, String id) {
-        this.title = title;
-        this.price = price;
-        this.strikePrice=strikePrice;
-        this.url="https://facebook.com/marketplace/item/" + id;
-
-    }
-
     public void output() {
         System.out.println("Title: " + this.title);
-        System.out.print("Price: " + this.price);
-        if (strikePrice!=null){
-            System.out.print("  StrikePrice: " + this.strikePrice);
-        }
-        System.out.println("");
+        System.out.println("Price: " + this.price);
         System.out.println("URL: " + this.url);
 
 

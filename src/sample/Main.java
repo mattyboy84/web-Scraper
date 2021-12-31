@@ -52,16 +52,22 @@ public class Main extends Application {
 
         Elements elements = doc.getAllElements();
 
-        Element targetSyntax = elements.get(elements.size()-6);
+        //System.out.println(doc);
 
-        String unformatJSON=targetSyntax.toString().substring(targetSyntax.toString().indexOf("{\"__bbox"),targetSyntax.toString().length()-21);
+        Element target = elements.get(elements.size()-6);
 
-        JsonObject wholeProductData = (JsonObject) new JsonParser().parse(unformatJSON);
+        //System.out.println(target);
 
-        //gets the array of products
+        String b=target.toString().substring(target.toString().indexOf("{\"__bbox"),target.toString().length()-21);
+
+        JsonObject wholeProductData = (JsonObject) new JsonParser().parse(b);
+
+        //System.out.println(wholeProductData);
+
         JsonArray productData = wholeProductData.get("__bbox").getAsJsonObject().get("result").getAsJsonObject()
                 .get("data").getAsJsonObject().get("marketplace_search").getAsJsonObject().get("feed_units")
                 .getAsJsonObject().get("edges").getAsJsonArray();
+
 
         for (int i = 0; i <productData.size() ; i++) {
             String title=productData.get(i).getAsJsonObject().get("node").getAsJsonObject().get("listing").getAsJsonObject().get("marketplace_listing_title").getAsString();
